@@ -28,7 +28,7 @@ pipeline {
             }
            stage('Deploy Apps: Production') {
               when {
-                buildingTag()
+                tag "v*"
               }
               steps {
                 script {
@@ -44,12 +44,12 @@ pipeline {
 String gitTagName() {
     commit = getCommit()
     if (commit) {
-        desc = sh(script: "git describe --tags ${commit}", returnStdout: true)?.trim()
+        desc = sh(script: "git describe --tags ${commit} --always", returnStdout: true)?.trim()
         if (isTag(desc)) {
             return desc
         }
     }
-    return ""
+    return null
 }
 
 /** @return The tag message, or `null` if the current commit isn't a tag. */
@@ -59,7 +59,7 @@ String gitTagMessage() {
     if (msg) {
         return msg.substring(name.size()+1, msg.size())
     }
-    return ""
+    return null
 }
 
 String getCommit() {
