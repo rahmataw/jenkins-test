@@ -28,11 +28,12 @@ pipeline {
             }
            stage('Deploy Apps: Production') {
               when {
-                tag "^v*"
+                tag "v*"
               }
               steps {
                 script {
                   sh 'echo "Deploy apps to production with tag ${TAG_NAME}"'
+                  sh 'cat README.md'
                 }
               }
            }
