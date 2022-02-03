@@ -28,7 +28,7 @@ pipeline {
             }
            stage('Deploy Apps: Production') {
               when {
-                tag "${TAG_NAME}"
+                buildingTag()
               }
               steps {
                 script {
