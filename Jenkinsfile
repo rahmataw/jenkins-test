@@ -46,7 +46,7 @@ pipeline {
             stage('Build and push image Staging') {
               when {
                 expression {
-                   return env.GIT_BRANCH == "origin/jenkins-ci"
+                   return env.GIT_BRANCH == "origin/main"
                  }
               }
               steps {
@@ -81,7 +81,7 @@ pipeline {
             stage('Scan vulnerability on Staging') {
               when {
                 expression {
-                   return env.GIT_BRANCH == "origin/jenkins-ci"
+                   return env.GIT_BRANCH == "origin/main"
                  }
               }
               environment { IMAGE_TAG = "${GIT_COMMIT_SHORT}-${BUILD_NUMBER}" }
@@ -126,7 +126,7 @@ pipeline {
             stage('Configure deployment on Staging') {
               when {
                 expression {
-                   return env.GIT_BRANCH == "origin/jenkins-ci"
+                   return env.GIT_BRANCH == "origin/main"
                  }
               }
               environment { 
@@ -170,7 +170,7 @@ pipeline {
             stage('Deploy Apps: Staging') {
               when {
                 expression {
-                   return env.GIT_BRANCH == "origin/jenkins-ci"
+                   return env.GIT_BRANCH == "origin/main"
                  }
               }
               environment { ENV_INFRA = 'staging' }
