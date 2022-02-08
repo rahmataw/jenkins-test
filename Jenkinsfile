@@ -244,7 +244,7 @@ pipeline {
                 ],
           			[
           				"title": "Branch",
-          				"value": "$BRANCH_NAME",
+          				"value": "$GIT_BRANCH",
           				"short": true
                 ],
           			[
