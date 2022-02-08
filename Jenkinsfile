@@ -226,12 +226,43 @@ pipeline {
     post {
     success {
       script {
-        slackSend (tokenCredentialId: 'jenkins-notif-test', teamDomain: 'jenkins-notifgroup', channel: '#general', botUser: true, color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+        def attachments = [
+          [
+          	{
+          		"fallback": "$JOB_NAME execution #$BUILD_NUMBER",
+          		"color": "danger",
+          		"fields": [
+          			{
+          				"title": "Failed execution",
+          				"value": "<$BUILD_URL|Execution #$BUILD_NUMBER $GIT_COMMIT_MSG>",
+          				"short": true
+          			},
+          			{
+          				"title": "Pipeline",
+          				"value": "<$JOB_URL|$JOB_NAME>",
+          				"short": true
+          			},
+          			{
+          				"title": "Branch",
+          				"value": "$BRANCH_NAME",
+          				"short": true
+          			},
+          			{
+          				"title": "Project",
+          				"value": "<$BUDDY_PROJECT_URL|$PROJECT_NAME>",
+          				"short": true
+          			}
+          		]
+          	}
+          ]
+        ]
+        slackSend (tokenCredentialId: 'jenkins-notif-test', teamDomain: 'jenkins-notifgroup', channel: '#general', botUser: true, color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", attachments: attachments)
       }
     }
 
     failure {
-      slackSend (tokenCredentialId: 'jenkins-notif-test', teamDomain: 'jenkins-notifgroup', channel: '#general', botUser: true, color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      slackSend (tokenCredentialId: 'jenkins-notif-test', teamDomain: 'jenkins-notifgroup', channel: '#general', botUser: true, color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", attachments: attachments)
     }
   }
 }
