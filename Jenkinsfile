@@ -249,7 +249,7 @@ pipeline {
                 ],
           			[
           				"title": "Project",
-          				"value": "<$BUDDY_PROJECT_URL|$PROJECT_NAME>",
+          				"value": "<$PROJECT_URL|$PROJECT_NAME>",
           				"short": true
                 ]
           		]
