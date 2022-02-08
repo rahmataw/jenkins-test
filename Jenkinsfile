@@ -226,7 +226,8 @@ pipeline {
     post {
     success {
       script {
-        env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+        GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+        BUILD_USER_ID = "${currentBuild.getBuildCauses()[0].shortDescription} / ${currentBuild.getBuildCauses()[0].userId}"
         def attachments = [
           [
           		"fallback": "$JOB_NAME execution #$BUILD_NUMBER",
@@ -255,7 +256,7 @@ pipeline {
           		]
           ]
         ]
-        slackSend (tokenCredentialId: 'jenkins-notif-test', teamDomain: 'jenkins-notifgroup', channel: '#general', botUser: true, color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", attachments: attachments)
+        slackSend (tokenCredentialId: 'jenkins-notif-test', teamDomain: 'jenkins-notifgroup', channel: '#general', botUser: true, color: '#00FF00', message: "[#$BUILD_NUMBER] $JOB_NAME execution by $BUILD_USER_ID", attachments: attachments)
       }
     }
 
