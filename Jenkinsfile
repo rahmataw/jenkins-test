@@ -226,12 +226,12 @@ pipeline {
     post {
     success {
       script {
-        slackSend (tokenCredentialId: 'jenkins-notif-test', color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        slackSend (tokenCredentialId: 'jenkins-notif-test', teamDomain: 'jenkins-notifgroup', channel: '#general', botUser: true, color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       }
     }
 
     failure {
-      slackSend (tokenCredentialId: 'jenkins-notif-test', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      slackSend (tokenCredentialId: 'jenkins-notif-test', teamDomain: 'jenkins-notifgroup', channel: '#general', botUser: true, tokenCredentialId: 'jenkins-notif-test', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
     }
   }
 }
