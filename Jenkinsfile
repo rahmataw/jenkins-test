@@ -232,26 +232,26 @@ pipeline {
           		"fallback": "$JOB_NAME execution #$BUILD_NUMBER",
           		"color": "danger",
           		"fields": [
-          			{
+          			[
           				"title": "Failed execution",
           				"value": "<$BUILD_URL|Execution #$BUILD_NUMBER $GIT_COMMIT_MSG>",
           				"short": true
-          			},
-          			{
+                ],
+          			[
           				"title": "Pipeline",
           				"value": "<$JOB_URL|$JOB_NAME>",
           				"short": true
-          			},
-          			{
+                ],
+          			[
           				"title": "Branch",
           				"value": "$BRANCH_NAME",
           				"short": true
-          			},
-          			{
+                ],
+          			[
           				"title": "Project",
           				"value": "<$BUDDY_PROJECT_URL|$PROJECT_NAME>",
           				"short": true
-          			}
+                ]
           		]
           ]
         ]
