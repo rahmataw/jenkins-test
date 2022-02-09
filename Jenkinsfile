@@ -51,7 +51,7 @@ pipeline {
                 script {
                   echo 'docker login -u _json_key -p "${GS_SA}" https://${REGISTRY_URL}'
 
-                  //def imageBuild = docker.build("${REGISTRY_URL}/${REPOSITORY}")
+                  echo 'def imageBuild = docker.build("${REGISTRY_URL}/${REPOSITORY}")'
                   //imageBuild.push("${GIT_COMMIT_SHORT}")
                   //imageBuild.push("${GIT_COMMIT_SHORT}-${BUILD_NUMBER}")
                 }
@@ -65,7 +65,7 @@ pipeline {
                 script {
                   echo 'docker login -u _json_key -p "${GS_SA}" https://${REGISTRY_URL}'
 
-                  //def imageBuild = docker.build("${REGISTRY_URL}/${REPOSITORY}")
+                  echo 'def imageBuild = docker.build("${REGISTRY_URL}/${REPOSITORY}")'
                   //imageBuild.push("${TAG_NAME}")
                   //imageBuild.push("${TAG_NAME}-${BUILD_NUMBER}")
                 }
