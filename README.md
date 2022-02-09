@@ -1,1 +1,1 @@
-## Jenkins-test tag v7.0.5
+## Jenkins-test tag v7.0.6
