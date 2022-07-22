@@ -31,7 +31,7 @@ RUN chown -R nobody.nobody /run && \
 
 # Add application
 WORKDIR /app
-COPY app/* /app
+COPY app/ /app
 
 # Switch to use a non-root user from here on
 USER nobody
