@@ -15,7 +15,7 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - sed -i 's|IMAGE/$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com|$IMAGE_REPO_NAME:$IMAGE_TAG|g' Dockerrun.aws.json
+      - sed -i 's|IMAGE|$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG|g' Dockerrun.aws.json
 artifacts:
   files:
     - 'Dockerrun.aws.json'
