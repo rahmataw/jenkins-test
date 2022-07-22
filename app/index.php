@@ -48,7 +48,7 @@ else
 
         <h2>A Happy Sun</h2>
         <ul>
-            <img src="sun-75.gif" alt="this happy sun"  width="250" />
+            <img src="/efs/sun-75.gif" alt="this happy sun"  width="250" />
         </ul>
     </section>
 
