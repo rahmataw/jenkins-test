@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  app:
+    image: php-eb-poc:latest
+    working_dir: /app
+    ports:
+      - 80:8080
